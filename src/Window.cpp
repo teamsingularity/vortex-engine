@@ -1,6 +1,5 @@
 #include "Window.hpp"
 #include <iostream>
-#include <Util/MessageBox.hpp>
 
 int Window::width;
 int Window::height;
@@ -18,7 +17,7 @@ bool Window::init(int w, int h, std::string title)
     window = glfwCreateWindow(w, h, title.c_str(), nullptr, nullptr);
     if (window == nullptr)
     {
-        MSG_ERROR("GLFW error", "Failed to create window!");
+        std::cerr << "Failed to create window!" << std::endl;
         glfwTerminate();
         return false;
     }

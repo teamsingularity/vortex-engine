@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 4.0)
 project(vortex-engine)
 
-add_executable(vortex-engine src/main.cpp)
+add_executable(vortex-engine
+    src/main.cpp
+    src/Window.hpp
+    src/Window.cpp
+)
 
 target_compile_definitions(vortex-engine PRIVATE GLEW_STATIC)
 
