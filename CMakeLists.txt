@@ -5,6 +5,8 @@ add_executable(vortex-engine
     src/main.cpp
     src/Window.hpp
     src/Window.cpp
+    src/shader.cpp
+
 )
 
 target_compile_definitions(vortex-engine PRIVATE GLEW_STATIC)
