@@ -11,9 +11,7 @@ public:
     Shader(const char* vertexSource, const char* fragmentSource);
 
     
-    void use() {
-        glUseProgram(ID);
-    }
+    void use();
 
 
     ~Shader() {
