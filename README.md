@@ -1,13 +1,13 @@
-# vortex
+# Vortex Engine
 
-## Simple 3D OpenGL engine written in C++
+Vortex Engine is our in-house 3D game engine, built to serve as the foundation for our games.  
+It provides essential systems like rendering, input handling, and shader management, allowing the team to focus on creating gameplay, story, and assets without worrying about low-level graphics or window management.
 
-### Building
+## Purpose
 
-#### Linux
+- To give our team a **stable and flexible base** for building games.
+- To handle **core engine tasks**: window creation, rendering, input, shaders.
+- To enable **rapid prototyping** of gameplay and mechanics.
+- To ensure **consistent tools** for all team members, regardless of platform.
 
-Install `glfw, glew, cmake, gcc, g++`
-
-Run `cmake -S . -B build` to bootstrap project  
-
-Run `cmake --build build` to build project
+This engine is not tied to a specific game yet — it’s a framework we can build upon as the game idea develops.
