@@ -9,9 +9,19 @@ public:
     GLuint ID;
 
     Shader(const char* vertexSource, const char* fragmentSource);
-    void use();
+
+    
+    void use() {
+        glUseProgram(ID);
+    }
+
+
+    ~Shader() {
+        glDeleteProgram(ID);
+    }
 
 private:
+    
     GLuint compileShader(GLenum type, const char* source);
 };
 
