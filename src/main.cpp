@@ -8,18 +8,21 @@
 
 int main(void){
     
+
+
     if (!Window::init(WIDTH, HEIGHT, "Vortex Engine"))
     {
-        std::cerr << "Failed to initialize window!" << std::endl;
+        std::cerr << "Failed to initialize window!" << std::endl; //Error struggles
         return 1;
     }
-
+    
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-    while (!Window::shouldClose())
+    while (!Window::shouldClose()) //Main loop
     {
         glfwPollEvents();
-
+                                        
         glClear(GL_COLOR_BUFFER_BIT);
+       
         Window::swapBuffers();
     }
 

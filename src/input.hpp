@@ -17,7 +17,6 @@ public:
     static float mouseX, mouseY;
     static bool cursorLocked;
     static bool cursorStarted;
-
     static bool* keys;
     static uint* frames;
     static uint current;

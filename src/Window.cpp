@@ -34,7 +34,7 @@ bool Window::init(int w, int h, std::string title)
         glfwTerminate();
         return false;
     }
-
+    
     glViewport(0, 0, width, height);
 
     return true;

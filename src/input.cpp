@@ -3,7 +3,7 @@
 #include "GLFW/glfw3.h"
 
 #define MOUSE_BUTTONS 1024
-
+//Variables
 float Input::mouseX = 0.0f;
 float Input::mouseY = 0.0f;
 bool Input::cursorLocked = false;
@@ -15,6 +15,8 @@ uint Input::current =0;
 
 float Input::deltaY = 0.0f;
 float Input::deltaX = 0.0f;
+
+//Functions
 bool Input::getKey(int keycode)
 {
     return keys[keycode];
@@ -82,5 +84,5 @@ void Input::pollEvents()
 
 void Input::terminate()
 {
-    //jam
+    //
 }
