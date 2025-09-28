@@ -3,10 +3,12 @@ project(vortex-engine)
 
 add_executable(vortex-engine
     src/main.cpp
-    src/Window.hpp
-    src/Window.cpp
+    src/window.cpp
+    src/window.hpp
     src/shader.cpp
-
+    src/shader.hpp
+    src/input.cpp
+    src/input.hpp
 )
 
 target_compile_definitions(vortex-engine PRIVATE GLEW_STATIC)

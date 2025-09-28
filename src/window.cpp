@@ -1,12 +1,12 @@
-#include "Window.hpp"
+#include "window.hpp"
 #include <iostream>
 
-int Window::width;
-int Window::height;
-std::string Window::title;
-GLFWwindow* Window::window;
+int window::width;
+int window::height;
+std::string window::title;
+GLFWwindow* window::win;
 
-bool Window::init(int w, int h, std::string title)
+bool window::init(int w, int h, std::string title)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -14,8 +14,8 @@ bool Window::init(int w, int h, std::string title)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    window = glfwCreateWindow(w, h, title.c_str(), nullptr, nullptr);
-    if (window == nullptr)
+    win = glfwCreateWindow(w, h, title.c_str(), nullptr, nullptr);
+    if (win == nullptr)
     {
         std::cerr << "Failed to create window!" << std::endl;
         glfwTerminate();
@@ -25,7 +25,7 @@ bool Window::init(int w, int h, std::string title)
     width = w;
     height = h;
 
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(win);
 
     glewExperimental = true;
     if (glewInit() != GLEW_OK)
@@ -40,17 +40,17 @@ bool Window::init(int w, int h, std::string title)
     return true;
 }
 
-void Window::swapBuffers()
+void window::swapBuffers()
 {
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(win);
 }
 
-bool Window::shouldClose()
+bool window::shouldClose()
 {
-    return glfwWindowShouldClose(window);
+    return glfwWindowShouldClose(win);
 }
 
-void Window::terminate()
+void window::terminate()
 {
     glfwTerminate();
 }

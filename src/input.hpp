@@ -1,18 +1,18 @@
 #ifndef INPUT_HPP
 #define INPUT_HPP
-#include "Window.hpp"
+#include "window.hpp"
 
-class Input 
+class input 
 {
 public:
     static bool init();
     static void terminate();
 
     static bool getKey(int keycode);
-    static bool getKeyDown();
+    static bool getKeyDown(int keycode);
 
-    static bool getMouseButton();
-    static bool getMouseButtonDown();
+    static bool getMouseButton(int button);
+    static bool getMouseButtonDown(int button);
 
     static float mouseX, mouseY;
     static bool cursorLocked;

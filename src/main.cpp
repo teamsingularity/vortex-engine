@@ -1,23 +1,23 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <Window.hpp>
+#include "window.hpp"
 #include "shader.hpp"
+#include "input.hpp"
 #define WIDTH 1280
 #define HEIGHT 720
 
 int main(void){
-    
-
-
-    if (!Window::init(WIDTH, HEIGHT, "Vortex Engine"))
+    if (!window::init(WIDTH, HEIGHT, "Vortex Engine"))
     {
         std::cerr << "Failed to initialize window!" << std::endl; //Error struggles
         return 1;
     }
 
+    input::init();
+
     //Testing triangle n shader (tnx GPT)
-       GLfloat vertices[] = {
+     GLfloat vertices[] = {
         -0.5f, -0.5f, 0.0f,  // левая нижняя
          0.5f, -0.5f, 0.0f,  // правая нижняя
          0.0f,  0.5f, 0.0f   // верхняя
@@ -38,7 +38,7 @@ void main() {
 }
 )";
 
-Shader shader(vertexShaderSource, fragmentShaderSource);
+    shader* shader = shader::loadShader(vertexShaderSource, fragmentShaderSource);
 
     //VBO, VAO creation
     GLuint VAO, VBO;
@@ -56,17 +56,21 @@ Shader shader(vertexShaderSource, fragmentShaderSource);
     glBindVertexArray(0); 
 
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    while (!Window::shouldClose()) //Main loop
-    {
-    glfwPollEvents();
-    glClear(GL_COLOR_BUFFER_BIT);
+    while (!window::shouldClose()) {
+        glfwPollEvents();
+        glClear(GL_COLOR_BUFFER_BIT);
 
-    shader.use();          
-    glBindVertexArray(VAO); 
-    glDrawArrays(GL_TRIANGLES, 0, 3); 
-    glBindVertexArray(0);
+        if (input::getMouseButton(GLFW_MOUSE_BUTTON_1))
+        {
+            glClearColor(0.5f, 1.0f, 1.0f, 1.0f);
+        }
 
-    Window::swapBuffers();
+        shader->use();          
+        glBindVertexArray(VAO); 
+        glDrawArrays(GL_TRIANGLES, 0, 3); 
+        glBindVertexArray(0);
+
+        window::swapBuffers();
     }
 
     glfwTerminate();

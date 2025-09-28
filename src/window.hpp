@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
-class Window
+class window
 {
 public:
     static bool init(int width, int height, std::string title);
@@ -18,7 +18,7 @@ public:
     static int height;
     static std::string title;
 
-    static GLFWwindow* window;
+    static GLFWwindow* win;
 };
 
 #endif

@@ -1,79 +1,95 @@
 #include "input.hpp"
 #include <string.h>
+#include <iostream>
 #include "GLFW/glfw3.h"
 
-#define MOUSE_BUTTONS 1024
+#define MOUSE_BUTTONS_OFFSET 1024
 //Variables
-float Input::mouseX = 0.0f;
-float Input::mouseY = 0.0f;
-bool Input::cursorLocked = false;
-bool Input::cursorStarted = false;
+float input::mouseX = 0.0f;
+float input::mouseY = 0.0f;
+bool input::cursorLocked = false;
+bool input::cursorStarted = false;
 
-bool* Input::keys;
-uint* Input::frames;
-uint Input::current =0;
+bool* input::keys;
+uint* input::frames;
+uint input::current =0;
 
-float Input::deltaY = 0.0f;
-float Input::deltaX = 0.0f;
+float input::deltaY = 0.0f;
+float input::deltaX = 0.0f;
 
 //Functions
-bool Input::getKey(int keycode)
+bool input::getKey(int keycode)
 {
     return keys[keycode];
 }
 
-void getCursorPosition(GLFWwindow* window, double xpos, double ypos)
+bool input::getKeyDown(int keycode)
 {
-if (Input::cursorStarted)
-{
-    Input::deltaX += xpos -Input::mouseX;
-    Input::deltaY += ypos -Input::mouseY;
-} else {
-    Input::cursorStarted = true;
-}
-    Input::mouseX = xpos;
-    Input::mouseY = ypos;
+    return keys[keycode] && (frames[keycode] == current);
 }
 
-void getButtonRC(GLFWwindow* window, int button, int action, int mode){
+bool input::getMouseButton(int button)
+{
+    return keys[MOUSE_BUTTONS_OFFSET + button];
+}
+
+bool input::getMouseButtonDown(int button)
+{
+    return keys[MOUSE_BUTTONS_OFFSET + button] && (frames[MOUSE_BUTTONS_OFFSET + button] == current);
+}
+
+void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
+{
+    if (input::cursorStarted)
+    {
+        input::deltaX += xpos -input::mouseX;
+        input::deltaY += ypos -input::mouseY;
+    } else {
+        input::cursorStarted = true;
+    }
+
+    input::mouseX = xpos;
+    input::mouseY = ypos;
+}
+
+void mouseButtonCallback(GLFWwindow* window, int button, int action, int mode){
 	if (action == GLFW_PRESS){
-		Input::keys[MOUSE_BUTTONS+button] = true;
-		Input::frames[MOUSE_BUTTONS+button] = Input::current;
+		input::keys[MOUSE_BUTTONS_OFFSET+button] = true;
+		input::frames[MOUSE_BUTTONS_OFFSET+button] = input::current;
 	}
 	else if (action == GLFW_RELEASE){
-		Input::keys[MOUSE_BUTTONS+button] = false;
-		Input::frames[MOUSE_BUTTONS+button] = Input::current;
+		input::keys[MOUSE_BUTTONS_OFFSET+button] = false;
+		input::frames[MOUSE_BUTTONS_OFFSET+button] = input::current;
     }
 }
 
-void keyRC(GLFWwindow* window , int key, int scancode, int action , int mode){
+void keyCallback(GLFWwindow* window , int key, int scancode, int action , int mode){
     if(action == GLFW_PRESS){
-        Input::keys[key] = true;
-        Input::frames[key] = Input::current;
+        input::keys[key] = true;
+        input::frames[key] = input::current;
     } else if (action == GLFW_RELEASE){
-        Input::keys[key] = false;
-        Input::frames[key] = Input::current;
+        input::keys[key] = false;
+        input::frames[key] = input::current;
     }
 }
 
-bool Input::init()
+bool input::init()
 {
-    GLFWwindow* win = Window::window;
+    GLFWwindow* win = window::win;
     keys = new bool[1032];
     frames = new uint[1032];
 
     memset(keys, false, 1032*sizeof(bool));
     memset(frames, 0, 1032*sizeof(uint));
 
-    glfwSetKeyCallback(win, keyRC);
-    glfwSetMouseButtonCallback(win, getButtonRC);
-    glfwSetCursorPosCallback(win, getCursorPosition);
+    glfwSetKeyCallback(win, keyCallback);
+    glfwSetMouseButtonCallback(win, mouseButtonCallback);
+    glfwSetCursorPosCallback(win, cursorPositionCallback);
 
     return true;
-    
 }
 
-void Input::pollEvents()
+void input::pollEvents()
 {
     deltaY = 0.0f;
     deltaX = 0.0f;
@@ -82,7 +98,7 @@ void Input::pollEvents()
     glfwPollEvents();
 }
 
-void Input::terminate()
+void input::terminate()
 {
-    //
+    // a stub
 }

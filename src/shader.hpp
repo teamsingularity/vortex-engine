@@ -4,23 +4,20 @@
 #include <string>
 #include <GL/glew.h>
 
-class Shader {
+class shader {
 public:
-    GLuint ID;
+    GLuint id;
 
-    Shader(const char* vertexSource, const char* fragmentSource);
-
+    shader(GLuint id);
     
     void use();
 
+    /*
+    I used const char* instead of std::string bc OpenGL requires shader code to be a char pointer
+    */
+    static shader* loadShader(const char* vertexCode, const char* fragmentCode);
 
-    ~Shader() {
-        glDeleteProgram(ID);
-    }
-
-private:
-    
-    GLuint compileShader(GLenum type, const char* source);
+    ~shader();
 };
 
 #endif
