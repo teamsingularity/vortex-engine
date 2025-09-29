@@ -6,18 +6,19 @@
 
 class shader {
 public:
-    GLuint id;
 
     shader(GLuint id);
+    ~shader();
     
-    void use();
-
     /*
     I used const char* instead of std::string bc OpenGL requires shader code to be a char pointer
     */
-    static shader* loadShader(const char* vertexCode, const char* fragmentCode);
+   static shader* loadShader(const char* vertexCode, const char* fragmentCode);
+   
+   void use();
 
-    ~shader();
+private:
+    GLuint id;
 };
 
 #endif

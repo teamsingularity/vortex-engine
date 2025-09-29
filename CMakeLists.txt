@@ -3,12 +3,17 @@ project(vortex-engine)
 
 add_executable(vortex-engine
     src/main.cpp
-    src/window.cpp
-    src/window.hpp
-    src/shader.cpp
-    src/shader.hpp
-    src/input.cpp
-    src/input.hpp
+    src/engine/window.cpp
+    src/engine/window.hpp
+    src/engine/input.cpp
+    src/engine/input.hpp
+    src/engine/render/shader.cpp
+    src/engine/render/shader.hpp
+    src/engine/render/texture.cpp
+    src/engine/render/texture.hpp
+    src/loader/png.cpp
+    src/loader/png.hpp
+    src/util/types.hpp
 )
 
 target_compile_definitions(vortex-engine PRIVATE GLEW_STATIC)
@@ -21,4 +26,11 @@ target_link_libraries(vortex-engine PRIVATE
     glfw
     GLEW
     GL
+    spng
+)
+
+add_custom_command(TARGET vortex-engine POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+        "${CMAKE_SOURCE_DIR}/res"
+        "${CMAKE_BINARY_DIR}/res"
 )
