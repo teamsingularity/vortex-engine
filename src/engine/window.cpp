@@ -1,12 +1,12 @@
 #include "window.hpp"
 #include <iostream>
 
-int window::width;
-int window::height;
-std::string window::title;
-GLFWwindow* window::win;
+int Window::width;
+int Window::height;
+std::string Window::title;
+GLFWwindow* Window::win;
 
-bool window::init(int w, int h, std::string title)
+bool Window::init(int w, int h, std::string title)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -40,17 +40,17 @@ bool window::init(int w, int h, std::string title)
     return true;
 }
 
-void window::swapBuffers()
+void Window::swapBuffers()
 {
     glfwSwapBuffers(win);
 }
 
-bool window::shouldClose()
+bool Window::shouldClose()
 {
     return glfwWindowShouldClose(win);
 }
 
-void window::terminate()
+void Window::terminate()
 {
     glfwTerminate();
 }

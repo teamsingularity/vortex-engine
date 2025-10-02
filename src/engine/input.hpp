@@ -1,8 +1,8 @@
 #ifndef INPUT_HPP
 #define INPUT_HPP
-#include "window.hpp"
+#include <defines.hpp>
 
-class input 
+class VORTEXAPI Input 
 {
 public:
     static bool init();

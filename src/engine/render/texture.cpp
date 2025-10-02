@@ -21,14 +21,14 @@ void flip_vertical(unsigned char* data, int width, int height)
     free(row_buffer);
 }
 
-texture::texture(GLuint id) : id(id) {}
+Texture::Texture(GLuint id) : id(id) {}
 
-texture::~texture()
+Texture::~Texture()
 {
     glDeleteTextures(1, &id);
 }
 
-texture* texture::load(image_t image)
+Texture* Texture::load(image_t image)
 {
     GLuint _texture;
 
@@ -49,10 +49,10 @@ texture* texture::load(image_t image)
     
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    return new texture(_texture);
+    return new Texture(_texture);
 }
 
-void texture::bind(int index)
+void Texture::bind(int index)
 {
     glActiveTexture(GL_TEXTURE0 + index);
     glBindTexture(GL_TEXTURE_2D, id);

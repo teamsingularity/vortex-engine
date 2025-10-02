@@ -11,3 +11,12 @@ It provides essential systems like rendering, input handling, and shader managem
 - To ensure **consistent tools** for all team members, regardless of platform.
 
 This engine is not tied to a specific game yet — it’s a framework we can build upon as the game idea develops.
+
+## Building
+
+### Linux
+
+Install `cmake, glfw, glew, libspng, glm` from your package manager.
+
+Run `cmake -S . -B build` to bootstrap project  
+Run `cmake --build build` to build dynamic library

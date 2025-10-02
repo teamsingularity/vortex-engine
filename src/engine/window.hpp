@@ -4,8 +4,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <string>
+#include <defines.hpp>
 
-class window
+class VORTEXAPI Window
 {
 public:
     static bool init(int width, int height, std::string title);

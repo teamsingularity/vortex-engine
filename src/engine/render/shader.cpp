@@ -1,13 +1,14 @@
 #include "shader.hpp"
 #include <iostream>
+#include <glm/gtc/type_ptr.hpp>
 
-shader::shader(GLuint id) : id(id) {}
+Shader::Shader(GLuint id) : id(id) {}
 
-shader::~shader() {
+Shader::~Shader() {
     glDeleteProgram(id);
 }
 
-shader* shader::loadShader(const char* vertexCode, const char* fragmentCode)
+Shader* Shader::load(const char* vertexCode, const char* fragmentCode)
 {
     /* Compile shaders */
     GLint success;
@@ -58,9 +59,15 @@ shader* shader::loadShader(const char* vertexCode, const char* fragmentCode)
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    return new shader(shaderProgram);
+    return new Shader(shaderProgram);
 }
 
-void shader::use() {
+void Shader::use() {
     glUseProgram(id);
+}
+
+void Shader::uniformMatrix4fv(std::string name, glm::mat4 matrix)
+{
+    GLuint loc = glGetUniformLocation(id, name.c_str());
+    glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(matrix));
 }

@@ -3,8 +3,9 @@
 
 #include <string>
 #include <util/types.hpp>
+#include <defines.hpp>
 
-class png_loader
+class VORTEXAPI PNGLoader
 {
 public:
     /* Loads an PNG image and returns image info struct with pointer to RGBA8888 raw data, nullptr if error occured */

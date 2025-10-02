@@ -3,14 +3,15 @@
 
 #include <util/types.hpp>
 #include <GL/glew.h>
+#include <defines.hpp>
 
-class texture
+class VORTEXAPI Texture
 {
 public:
-    texture(GLuint id);
-    ~texture();
+    Texture(GLuint id);
+    ~Texture();
 
-    static texture* load(image_t image);
+    static Texture* load(image_t image);
 
     void bind(int index);
 

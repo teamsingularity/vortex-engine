@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <iostream>
 
-image_t png_loader::load(std::string filename)
+image_t PNGLoader::load(std::string filename)
 {
     image_t image{0, 0, nullptr};
 
