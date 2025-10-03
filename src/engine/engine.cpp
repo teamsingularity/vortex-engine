@@ -1,4 +1,5 @@
 #include "engine.hpp"
+#include <GLFW/glfw3.h>
 #include <engine/window.hpp>
 #include <engine/input.hpp>
 
@@ -7,6 +8,8 @@ std::unordered_map<std::string, Texture*> Engine::textures;
 std::unordered_map<std::string, Material*> Engine::materials;
 std::unordered_map<std::string, GameObject*> Engine::scene;
 float Engine::deltaTime;
+
+float lastTime = 0.0f;
 
 bool Engine::init(std::string title, int width, int height)
 {
@@ -64,6 +67,10 @@ GameObject* Engine::getGameObject(std::string name)
 
 void Engine::update()
 {
+    float currentTime = glfwGetTime();
+    deltaTime = currentTime - lastTime;
+    lastTime = currentTime;
+
     for (auto& [name, object] : scene)
         object->update();
 
