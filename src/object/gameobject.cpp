@@ -14,7 +14,8 @@ void GameObject::start()
 {
     for (auto component : components)
         component->start();
-    renderer->start();
+
+    if (renderer) renderer->start();
 }
 
 void GameObject::update()
@@ -24,8 +25,8 @@ void GameObject::update()
 }
 
 void GameObject::render()
-{
-    renderer->render();
+{   
+    if (renderer) renderer->render();
 }
 
 void GameObject::lateUpdate()
@@ -38,7 +39,7 @@ void GameObject::destroy()
 {
     for (auto component : components)
         component->destroy();
-    renderer->destroy();
+    if (renderer) renderer->destroy();
 }
 
 void GameObject::addComponent(Component* component)

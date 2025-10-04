@@ -7,6 +7,7 @@ std::unordered_map<std::string, Shader*> Engine::shaders;
 std::unordered_map<std::string, Texture*> Engine::textures;
 std::unordered_map<std::string, Material*> Engine::materials;
 std::unordered_map<std::string, GameObject*> Engine::scene;
+Camera* Engine::camera;
 float Engine::deltaTime;
 
 float lastTime = 0.0f;
@@ -15,6 +16,7 @@ bool Engine::init(std::string title, int width, int height)
 {
     if (!Window::init(width, height, title)) return false;
     if (!Input::init()) return false;
+    camera = nullptr;
     return true;
 }
 

@@ -21,6 +21,8 @@ add_library(vortex-engine SHARED
     src/component/renderer.hpp
     src/component/renderers/meshrenderer.cpp
     src/component/renderers/meshrenderer.hpp
+    src/component/core/camera.cpp
+    src/component/core/camera.hpp
     src/object/gameobject.cpp
     src/object/gameobject.hpp
     src/object/transform.cpp

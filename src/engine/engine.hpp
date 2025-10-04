@@ -7,6 +7,7 @@
 #include <engine/render/shader.hpp>
 #include <engine/render/texture.hpp>
 #include <object/gameobject.hpp>
+#include <component/core/camera.hpp>
 #include <string>
 
 class VORTEXAPI Engine
@@ -28,6 +29,8 @@ public:
     static GameObject* getGameObject(std::string name);
 
     static void update();
+
+    static Camera* camera;
 
     static float deltaTime;
 
