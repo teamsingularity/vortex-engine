@@ -72,7 +72,10 @@ void Engine::update()
     lastTime = currentTime;
 
     for (auto& [name, object] : scene)
+    {
         object->update();
+        object->transform.update();
+    }
 
     for (auto& [name, object] : scene)
         object->render();
