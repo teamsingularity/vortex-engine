@@ -10,7 +10,7 @@ It provides essential systems like rendering, input handling, and shader managem
 - To enable **rapid prototyping** of gameplay and mechanics.
 - To ensure **consistent tools** for all team members, regardless of platform.
 
-This engine is not tied to a specific game yet — it’s a framework we can build upon as the game idea develops.
+This engine is not tied to a specific game yet — it’s a framework we can build upon as the game idea develops
 
 ## Building
 
