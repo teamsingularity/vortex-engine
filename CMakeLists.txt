@@ -46,6 +46,7 @@ target_link_libraries(vortex-engine PRIVATE
     GLEW
     GL
     spng
+    Assimp
 )
 
 target_compile_definitions(vortex-engine PRIVATE VORTEX_BUILD)
