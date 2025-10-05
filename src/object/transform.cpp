@@ -1,7 +1,7 @@
 #include "transform.hpp"
 #include <glm/ext/matrix_float2x2.hpp>
 
-Transform::Transform() : position(0), rotation(glm::angleAxis(glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 0.0f))), scale(1, 1, 1),
+Transform::Transform() : position(0), rotation(glm::quat(1, 0, 0, 0)), scale(1, 1, 1),
                     forward(0), right(0)
 {
 }

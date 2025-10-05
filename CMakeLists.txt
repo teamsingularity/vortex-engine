@@ -30,6 +30,7 @@ add_library(vortex-engine SHARED
     src/loader/png.cpp
     src/loader/png.hpp
     src/util/types.hpp
+    src/shaders.hpp
 )
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

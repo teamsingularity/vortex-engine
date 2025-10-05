@@ -2,7 +2,7 @@
 #include "component/component.hpp"
 #include "object/transform.hpp"
 
-GameObject::GameObject() : transform()
+GameObject::GameObject() : transform(), renderer(nullptr), mat(nullptr)
 {
 }
 
@@ -13,7 +13,7 @@ GameObject::~GameObject()
 void GameObject::start()
 {
     for (auto component : components)
-        component->start();
+        if (component) component->start();
 
     if (renderer) renderer->start();
 }
@@ -21,7 +21,7 @@ void GameObject::start()
 void GameObject::update()
 {
     for (auto component : components)
-        component->update();
+        if (component) component->update();
 }
 
 void GameObject::render()
@@ -32,13 +32,13 @@ void GameObject::render()
 void GameObject::lateUpdate()
 {
     for (auto component : components)
-        component->lateUpdate();
+        if (component) component->lateUpdate();
 }
 
 void GameObject::destroy()
 {
     for (auto component : components)
-        component->destroy();
+        if (component) component->destroy();
     if (renderer) renderer->destroy();
 }
 

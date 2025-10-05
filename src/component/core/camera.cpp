@@ -38,5 +38,5 @@ glm::mat4 Camera::getProjection()
 
 glm::mat4 Camera::getView()
 {
-    return object->transform.getMatrix();
+    return glm::inverse(object->transform.getMatrix());
 }
