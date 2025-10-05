@@ -6,11 +6,8 @@
 
 class Model {
     public:
-        static Mesh load(const std::string& name);
+        static Mesh* load(const std::string& name);
 };
-
-
-
 
 
 #endif

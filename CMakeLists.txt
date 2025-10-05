@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 4.0)
 project(vortex-engine)
-
+find_library(ASSIMP_LIB assimp PATHS /usr/lib /usr/lib/x86_64-linux-gnu REQUIRED)
 add_library(vortex-engine SHARED
     # src/main.cpp
     src/engine/window.cpp
@@ -31,6 +31,8 @@ add_library(vortex-engine SHARED
     src/loader/png.hpp
     src/util/types.hpp
     src/shaders.hpp
+    src/loader/model.hpp
+    src/loader/model.cpp
 )
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -46,7 +48,8 @@ target_link_libraries(vortex-engine PRIVATE
     GLEW
     GL
     spng
-    Assimp
+    ${ASSIMP_LIB}
+
 )
 
 target_compile_definitions(vortex-engine PRIVATE VORTEX_BUILD)
