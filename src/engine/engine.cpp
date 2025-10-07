@@ -1,4 +1,5 @@
 #include "engine.hpp"
+#include "engine/render/shader.hpp"
 #include <GLFW/glfw3.h>
 #include <engine/window.hpp>
 #include <engine/input.hpp>
@@ -17,6 +18,9 @@ bool Engine::init(std::string title, int width, int height)
     if (!Window::init(width, height, title)) return false;
     if (!Input::init()) return false;
     camera = nullptr;
+
+    glEnable(GL_DEPTH_TEST);
+
     return true;
 }
 
@@ -73,15 +77,24 @@ void Engine::update()
     deltaTime = currentTime - lastTime;
     lastTime = currentTime;
 
+    Input::pollEvents();
+    
     for (auto& [name, object] : scene)
-        object->transform.update();
+    object->transform.update();
 
     for (auto& [name, object] : scene)
-        object->update();
+    object->update();
 
     for (auto& [name, object] : scene)
-        object->render();
+    object->render();
 
     for (auto& [name, object] : scene)
-        object->lateUpdate();
+    object->lateUpdate();
+
+    Window::swapBuffers();
+}
+
+void Engine::clear()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

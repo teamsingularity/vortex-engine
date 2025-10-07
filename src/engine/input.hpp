@@ -14,6 +14,8 @@ public:
     static bool getMouseButton(int button);
     static bool getMouseButtonDown(int button);
 
+    static void toggleCursor();
+
     static float mouseX, mouseY;
     static bool cursorLocked;
     static bool cursorStarted;

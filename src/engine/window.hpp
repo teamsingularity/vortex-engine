@@ -15,6 +15,8 @@ public:
     static bool shouldClose();
     static void terminate();
 
+    static void setCursorMode(int mode);
+
     static int width;
     static int height;
     static std::string title;

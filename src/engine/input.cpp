@@ -40,14 +40,14 @@ bool Input::getMouseButtonDown(int button)
 
 void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
 {
-    if (Input::cursorStarted)
+    if (Input::cursorStarted){
+        Input::deltaX += xpos-Input::mouseX;
+        Input::deltaY += ypos-Input::mouseY;
+    }
+    else
     {
-        Input::deltaX += xpos -Input::mouseX;
-        Input::deltaY += ypos -Input::mouseY;
-    } else {
         Input::cursorStarted = true;
     }
-
     Input::mouseX = xpos;
     Input::mouseY = ypos;
 }
@@ -101,4 +101,10 @@ void Input::pollEvents()
 void Input::terminate()
 {
     // a stub
+}
+
+void Input::toggleCursor()
+{
+    cursorLocked = !cursorLocked;
+	Window::setCursorMode(cursorLocked ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
 }

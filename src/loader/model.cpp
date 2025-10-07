@@ -10,8 +10,7 @@ Mesh* Model::load(const std::string& name)
 
     unsigned int flags = aiProcess_Triangulate
                        | aiProcess_GenNormals
-                       | aiProcess_FlipUVs
-                       | aiProcess_JoinIdenticalVertices;
+                       | aiProcess_FlipUVs;
 
     const aiScene* scene = importer.ReadFile(name.c_str(), flags);
 

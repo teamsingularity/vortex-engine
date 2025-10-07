@@ -29,6 +29,7 @@ public:
     static GameObject* getGameObject(std::string name);
 
     static void update();
+    static void clear();
 
     static Camera* camera;
 

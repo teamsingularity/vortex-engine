@@ -33,8 +33,10 @@ glm::mat4 Transform::getMatrix()
 
 void Transform::rotate(glm::vec3 rot)
 {
-    glm::vec3 radians = glm::radians(rot);
-    rotation = glm::quat(radians) * rotation;
+    glm::quat qX = glm::angleAxis(glm::radians(rot.x), glm::vec3(1,0,0));
+    glm::quat qY = glm::angleAxis(glm::radians(rot.y), glm::vec3(0,1,0));
+    glm::quat qZ = glm::angleAxis(glm::radians(rot.z), glm::vec3(0,0,1));
+    rotation = qX* qY * qZ * rotation;
 }
 
 void Transform::translate(glm::vec3 trans)

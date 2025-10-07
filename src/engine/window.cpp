@@ -54,3 +54,8 @@ void Window::terminate()
 {
     glfwTerminate();
 }
+
+void Window::setCursorMode(int mode)
+{
+    glfwSetInputMode(win, GLFW_CURSOR, mode);
+}
