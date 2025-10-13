@@ -56,9 +56,3 @@ target_link_libraries(vortex-engine PRIVATE
 )
 
 target_compile_definitions(vortex-engine PRIVATE VORTEX_BUILD)
-
-add_custom_command(TARGET vortex-engine POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
-        "${CMAKE_SOURCE_DIR}/res"
-        "${CMAKE_BINARY_DIR}/res"
-)

@@ -1,4 +1,5 @@
 #include "window.hpp"
+#include <GLFW/glfw3.h>
 #include <iostream>
 
 int Window::width;
@@ -58,4 +59,9 @@ void Window::terminate()
 void Window::setCursorMode(int mode)
 {
     glfwSetInputMode(win, GLFW_CURSOR, mode);
+}
+
+void Window::setTitle(std::string title)
+{
+    glfwSetWindowTitle(win, title.c_str());
 }
