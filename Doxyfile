@@ -1,0 +1,21 @@
+
+PROJECT_NAME           = "Vortex Engine"
+OUTPUT_DIRECTORY       = docs
+
+# Input
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+RECURSIVE              = YES
+FILE_PATTERNS          = *.hpp *.cpp
+INPUT                  = ./src
+
+# Output
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+
+# Styles
+DISABLE_INDEX = NO
+FULL_SIDEBAR = NO
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css
+HTML_COLORSTYLE        = LIGHT # required with Doxygen >= 1.9.5
