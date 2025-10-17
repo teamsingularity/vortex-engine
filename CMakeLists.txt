@@ -34,6 +34,12 @@ src/util/types.hpp
 src/shaders.hpp
 src/loader/model.hpp
 src/loader/model.cpp
+src/loader/OggLoader.cpp
+src/loader/OggLoader.hpp
+src/component/core/audiosource.cpp
+src/component/core/audiosource.hpp
+src/engine/audio.cpp
+src/engine/audio.hpp
 )
 
 find_library(ASSIMP_LIB assimp PATHS /usr/lib /usr/lib/x86_64-linux-gnu REQUIRED)

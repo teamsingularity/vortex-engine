@@ -32,7 +32,6 @@ public:
     static void clear();
 
     static Camera* camera;
-
     static float deltaTime;
 
 private:

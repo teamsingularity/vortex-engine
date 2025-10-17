@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <engine/window.hpp>
 #include <engine/input.hpp>
-
+#include "audio.hpp"
 std::unordered_map<std::string, Shader*> Engine::shaders;
 std::unordered_map<std::string, Texture*> Engine::textures;
 std::unordered_map<std::string, Material*> Engine::materials;
@@ -11,16 +11,18 @@ std::unordered_map<std::string, GameObject*> Engine::scene;
 Camera* Engine::camera;
 float Engine::deltaTime;
 
+
 float lastTime = 0.0f;
 
 bool Engine::init(std::string title, int width, int height)
 {
     if (!Window::init(width, height, title)) return false;
     if (!Input::init()) return false;
+    if (!Audio::init()) return false;
     camera = nullptr;
 
     glEnable(GL_DEPTH_TEST);
-
+    
     return true;
 }
 
@@ -28,6 +30,7 @@ void Engine::terminate()
 {
     Window::terminate();
     Input::terminate();
+    Audio::destroy();
 }
 
 void Engine::addShader(std::string name, Shader* shader)
@@ -84,7 +87,7 @@ void Engine::update()
 
     for (auto& [name, object] : scene)
     object->update();
-
+    Audio::update();
     for (auto& [name, object] : scene)
     object->render();
 
