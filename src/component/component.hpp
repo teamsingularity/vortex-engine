@@ -5,31 +5,48 @@
 
 class VORTEXAPI GameObject;
 
+/**
+ * @brief Base class for all components that can be attached to a GameObject.
+ * 
+ * Components define behavior and functionality for GameObjects in the scene.
+ */
 class VORTEXAPI Component
 {
 public:
+    /**
+     * @brief Virtual destructor for proper cleanup in derived classes.
+     */
     virtual ~Component() = default;
 
+    /**
+     * @brief Pointer to the GameObject this component is attached to.
+     */
     GameObject* object;
 
-    /*
-    start() is called once when object appears on scene.
-    */
+    /**
+     * @brief Called once when the GameObject appears on the scene.
+     * 
+     * Should be used for initialization logic.
+     */
     virtual void start() = 0;
 
-    /*
-    update() is called on each frame before rendering.
-    */
+    /**
+     * @brief Called on every frame before rendering.
+     * 
+     * Main update logic for the component should go here.
+     */
     virtual void update() = 0;
 
-    /*
-    lateUpdate() is called on each frame after rendering.
-    */
+    /**
+     * @brief Called on every frame after rendering.
+     * 
+     * Use for post-update logic that should run after all rendering.
+     */
     virtual void lateUpdate() = 0;
 
-    /*
-    destroy() is called once when object is being destroyed.
-    */
+    /**
+     * @brief Called once when the GameObject is being destroyed.
+     */
     virtual void destroy() = 0;
 };
 

@@ -2,6 +2,31 @@
 #ifndef SHADERS_HPP
 #define SHADERS_HPP
 
+/**
+ * @file shaders.hpp
+ * @brief Contains GLSL shader code as string literals for the engine.
+ *
+ * This file stores vertex and fragment shaders as C++ string literals.
+ * They can be passed directly to OpenGL shader compilation functions.
+ */
+
+/**
+ * @brief Vertex shader for lit objects.
+ *
+ * Attributes:
+ * - `position`  : Vertex position.
+ * - `normal`    : Vertex normal.
+ * - `uv`        : Texture coordinates.
+ *
+ * Outputs:
+ * - `texCoord`  : Passed to fragment shader.
+ * - `fragNormal`: Passed to fragment shader.
+ *
+ * Uniforms:
+ * - `transform` : Model transformation matrix.
+ * - `projection`: Projection matrix.
+ * - `view`      : View matrix.
+ */
 static const char* litVertex = R"(
 #version 330 core
 
@@ -23,6 +48,19 @@ void main() {
 }
 )";
 
+/**
+ * @brief Fragment shader for lit objects.
+ *
+ * Inputs:
+ * - `texCoord` : Interpolated texture coordinates from vertex shader.
+ * - `fragNormal`: Interpolated normal from vertex shader.
+ *
+ * Uniforms:
+ * - `_texture` : Texture sampler.
+ *
+ * Outputs:
+ * - `color` : Final fragment color.
+ */
 static const char* litFragment = R"(
 #version 330 core
 
@@ -37,4 +75,4 @@ void main() {
 }
 )";
 
-#endif
+#endif // SHADERS_HPP

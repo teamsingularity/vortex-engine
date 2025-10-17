@@ -5,26 +5,43 @@
 
 class VORTEXAPI GameObject;
 
+/**
+ * @brief Base class for all renderers that can be attached to a GameObject.
+ * 
+ * Renderers handle drawing of GameObjects each frame.
+ */
 class VORTEXAPI Renderer
 {
 public:
+    /**
+     * @brief Virtual destructor for proper cleanup in derived classes.
+     */
     virtual ~Renderer() = default;
 
+    /**
+     * @brief Pointer to the GameObject this renderer is attached to.
+     */
     GameObject* object;
 
-    /*
-    start() is called once when object appears on scene.
-    */
+    /**
+     * @brief Called once when the GameObject appears on the scene.
+     * 
+     * Initialization logic for the renderer should go here.
+     */
     virtual void start() = 0;
 
-    /*
-    render() is called on each frame after all updates but before late updates.
-    */
+    /**
+     * @brief Called on every frame after all updates but before late updates.
+     * 
+     * Use this method to render the GameObject.
+     */
     virtual void render() = 0;
 
-    /*
-    destroy() is called once when object is being destroyed.
-    */
+    /**
+     * @brief Called once when the GameObject is being destroyed.
+     * 
+     * Cleanup logic for the renderer should go here.
+     */
     virtual void destroy() = 0;
 };
 
