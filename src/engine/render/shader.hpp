@@ -7,7 +7,9 @@
 #include <defines.hpp>
 
 /**
- * Shader container that contains program ID and incapsulates methods to use it.
+ * @brief Contains shader program ID and incapsulates some useful methods.
+ *
+ * Shader class stores shader program ID and has methods to use it, send uniforms etc.
  */
 class VORTEXAPI Shader {
 public:
