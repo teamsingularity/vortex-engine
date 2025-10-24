@@ -34,8 +34,8 @@ src/util/types.hpp
 src/shaders.hpp
 src/loader/model.hpp
 src/loader/model.cpp
-src/loader/OggLoader.cpp
-src/loader/OggLoader.hpp
+src/loader/oggloader.cpp
+src/loader/oggloader.hpp
 src/component/core/audiosource.cpp
 src/component/core/audiosource.hpp
 src/engine/audio.cpp
@@ -58,7 +58,10 @@ target_link_libraries(vortex-engine PRIVATE
     GL
     spng
     ${ASSIMP_LIB}
-
+    openal
+    ogg
+    vorbis
+    vorbisfile
 )
 
 target_compile_definitions(vortex-engine PRIVATE VORTEX_BUILD)

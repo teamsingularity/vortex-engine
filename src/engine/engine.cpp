@@ -30,7 +30,7 @@ void Engine::terminate()
 {
     Window::terminate();
     Input::terminate();
-    Audio::destroy();
+    Audio::terminate();
 }
 
 void Engine::addShader(std::string name, Shader* shader)

@@ -9,7 +9,10 @@ Mesh* Model::load(const std::string& name)
     Assimp::Importer importer;
 
     unsigned int flags = aiProcess_Triangulate
+                       | aiProcess_JoinIdenticalVertices
+                       | aiProcess_SortByPType
                        | aiProcess_GenNormals
+                       | aiProcess_FlipWindingOrder
                        | aiProcess_FlipUVs;
 
     const aiScene* scene = importer.ReadFile(name.c_str(), flags);
@@ -24,6 +27,16 @@ Mesh* Model::load(const std::string& name)
 
     std::vector<float> vertexData;
     vertexData.reserve(numVertices * 8);
+
+    std::vector<unsigned int> indices;
+    indices.reserve(mesh->mNumFaces * 3);
+
+    for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
+        const aiFace& face = mesh->mFaces[i];
+        for (unsigned int j = 0; j < face.mNumIndices; j++) {
+            indices.push_back(face.mIndices[j]);
+        }
+    }
 
     for (unsigned int i = 0; i < numVertices; i++) {
         vertexData.push_back(mesh->mVertices[i].x);
@@ -51,7 +64,5 @@ Mesh* Model::load(const std::string& name)
 
     std::vector<int> attributes = {3, 3, 2};
 
-    float* vertices = new float[vertexData.size()];
-    std::copy(vertexData.begin(), vertexData.end(), vertices);
-    return new Mesh(vertices, vertexData.size() * sizeof(float), attributes);
+    return new Mesh(vertexData, indices, attributes);
 }

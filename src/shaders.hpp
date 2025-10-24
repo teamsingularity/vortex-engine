@@ -36,6 +36,7 @@ layout (location = 2) in vec2 uv;
 
 out vec2 texCoord;
 out vec3 fragNormal;
+out vec3 camBackwards;
 
 uniform mat4 transform;
 uniform mat4 projection;
@@ -45,6 +46,7 @@ void main() {
     gl_Position = projection * view * transform * vec4(position, 1.0);
     texCoord = uv;
     fragNormal = normal;
+    camBackwards = normalize(view[2].xyz);
 }
 )";
 
@@ -67,15 +69,34 @@ static const char* litFragment = R"(
 out vec4 color;
 in vec2 texCoord;
 in vec3 fragNormal;
+in vec3 camBackwards;
 
 uniform sampler2D _texture;
 
 void main() {
-    color = texture(_texture, texCoord);
+    vec3 N = normalize(fragNormal);
+    vec3 V = normalize(-camBackwards);
+
+    float brightness = clamp(dot(N, V), 0.0, 1.0);
+    brightness = mix(0.5, 1.0, brightness); // min 50% brightness
+
+    color = texture(_texture, texCoord) * brightness;
 }
 )";
 
-
+/**
+ * @brief Vertex shader for unlit objects.
+ *
+ * Inputs:
+ * - `texCoord` : Interpolated texture coordinates from vertex shader.
+ * - `fragNormal`: Interpolated normal from vertex shader.
+ *
+ * Uniforms:
+ * - `_texture` : Texture sampler.
+ *
+ * Outputs:
+ * - `color` : Final fragment color.
+ */
 static const char* unlitVertex = R"(
 #version 330 core
 
@@ -98,7 +119,7 @@ void main() {
 )";
 
 /**
- * @brief Fragment shader for lit objects.
+ * @brief Fragment shader for unlit objects.
  *
  * Inputs:
  * - `texCoord` : Interpolated texture coordinates from vertex shader.

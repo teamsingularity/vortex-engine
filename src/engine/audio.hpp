@@ -1,10 +1,7 @@
 #pragma once
 #include <AL/al.h>
 #include <AL/alc.h>
-#include <vector>
-#include "component/core/audiosource.hpp"
 #include "component/core/camera.hpp"
-#include <memory>
 
 /**
  * @class Audio
@@ -28,7 +25,7 @@ public:
     /**
      * @brief Destroys OpenAL context and device.
      */
-    static void destroy();
+    static void terminate();
 
 private:
     /**

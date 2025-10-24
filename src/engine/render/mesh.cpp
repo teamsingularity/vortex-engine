@@ -1,12 +1,13 @@
 #include "mesh.hpp"
-Mesh::Mesh(float* vertices, size_t verticesSize, std::vector<int> attributes)
+
+Mesh::Mesh(std::vector<float> vertices, std::vector<GLuint> indices, std::vector<int> attributes)
 {
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, verticesSize, vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
     int totalStride = 0;
     for (auto attr : attributes)
@@ -14,7 +15,8 @@ Mesh::Mesh(float* vertices, size_t verticesSize, std::vector<int> attributes)
         totalStride += attr;
     }
 
-    vertexCount = verticesSize / sizeof(float) / totalStride;
+    vertexCount = vertices.size() / totalStride;
+    indexCount = indices.size();
 
     int stride = 0;
     int index = 0;
@@ -25,6 +27,13 @@ Mesh::Mesh(float* vertices, size_t verticesSize, std::vector<int> attributes)
         stride += attr;
         index++;
     }
+
+    // EBO creation
+    glGenBuffers(1, &ebo);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW); 
+
 
     glBindVertexArray(0);
 }
@@ -37,7 +46,8 @@ Mesh::~Mesh()
 
 void Mesh::draw()
 {
-    glBindVertexArray(vao); 
-    glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }

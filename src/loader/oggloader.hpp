@@ -27,7 +27,7 @@ public:
      * Reads the OGG file, decodes it, and fills the audio_t structure
      * with PCM data, sample rate, and channel information.
      */
-    audio_t loadOgg(const char* filename);
+    static audio_t load(const char* filename);
 };
 
 #endif // OGGLOADER_HPP

@@ -22,11 +22,11 @@ class VORTEXAPI Mesh
 public:
     /**
      * @brief Constructs a mesh with vertex data and attributes.
-     * @param vertices Pointer to the array of vertex data.
-     * @param verticesSize Size of the vertex data array in bytes.
+     * @param vertices Vector of vertex data.
+     * @param indices Vector of indices data data array in bytes.
      * @param attributes Vector of integers describing vertex attributes (e.g., positions, normals, UVs).
      */
-    Mesh(float* vertices, size_t verticesSize, std::vector<int> attributes);
+    Mesh(std::vector<float> vertices, std::vector<GLuint> indices, std::vector<int> attributes);
 
     /**
      * @brief Destructor for Mesh.
@@ -50,9 +50,19 @@ private:
     GLuint vbo;
 
     /**
+     * @brief OpenGL Element Buffer Object.
+     */
+    GLuint ebo;
+
+    /**
      * @brief Number of vertices in the mesh.
      */
     GLuint vertexCount;
+
+    /**
+     * @brief Number of indices in the mesh.
+     */
+    GLuint indexCount;
 };
 
 #endif // MESH_HPP
