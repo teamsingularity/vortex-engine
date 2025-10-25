@@ -12,7 +12,7 @@ Camera::~Camera()
 
 void Camera::start()
 {
-    Engine::camera = this;
+    Engine::scene->camera = this;
 
     fov = 60.0f;
 }
@@ -28,7 +28,7 @@ void Camera::lateUpdate()
 
 void Camera::destroy()
 {
-    Engine::camera = nullptr;
+    Engine::scene->camera = nullptr;
 }
 
 glm::mat4 Camera::getProjection()

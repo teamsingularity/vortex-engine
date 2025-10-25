@@ -34,12 +34,16 @@ void Audio::terminate()
 
 void Audio::update()
 {
-    if (!Engine::camera || !Engine::camera->object) 
-        return;
+    glm::vec3 pos;
+    glm::vec3 forward;
+    glm::vec3 up;
 
-    glm::vec3 pos     = Engine::camera->object->transform.position;
-    glm::vec3 forward = Engine::camera->object->transform.forward;
-    glm::vec3 up      = Engine::camera->object->transform.up;
+    if (Engine::scene->camera && Engine::scene->camera->object) 
+    {
+        pos     = Engine::scene->camera->object->transform.position;
+        forward = Engine::scene->camera->object->transform.forward;
+        up      = Engine::scene->camera->object->transform.up;
+    }
 
     alListener3f(AL_POSITION, pos.x, pos.y, pos.z);
 

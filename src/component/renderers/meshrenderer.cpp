@@ -16,14 +16,14 @@ void MeshRenderer::start()
 
 void MeshRenderer::render()
 {
-    if (Engine::camera == nullptr) return;
+    if (Engine::scene->camera == nullptr) return;
 
     object->mat->matShader->use();
     object->mat->baseTexture->bind(0);
 
     object->mat->matShader->uniformMatrix4fv("transform", object->transform.getMatrix());
-    object->mat->matShader->uniformMatrix4fv("projection", Engine::camera->getProjection());
-    object->mat->matShader->uniformMatrix4fv("view", Engine::camera->getView());
+    object->mat->matShader->uniformMatrix4fv("projection", Engine::scene->camera->getProjection());
+    object->mat->matShader->uniformMatrix4fv("view", Engine::scene->camera->getView());
 
     mesh->draw();
 }

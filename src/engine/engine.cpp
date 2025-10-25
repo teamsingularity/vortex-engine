@@ -7,8 +7,7 @@
 std::unordered_map<std::string, Shader*> Engine::shaders;
 std::unordered_map<std::string, Texture*> Engine::textures;
 std::unordered_map<std::string, Material*> Engine::materials;
-std::unordered_map<std::string, GameObject*> Engine::scene;
-Camera* Engine::camera;
+Scene* Engine::scene;
 float Engine::deltaTime;
 
 
@@ -19,7 +18,6 @@ bool Engine::init(std::string title, int width, int height)
     if (!Window::init(width, height, title)) return false;
     if (!Input::init()) return false;
     if (!Audio::init()) return false;
-    camera = nullptr;
 
     glEnable(GL_DEPTH_TEST);
     
@@ -63,36 +61,16 @@ Material* Engine::getMaterial(std::string name)
     return materials[name];
 }
 
-void Engine::addGameObject(std::string name, GameObject* object)
-{
-    scene[name] = object;
-    object->start();
-}
-
-GameObject* Engine::getGameObject(std::string name)
-{
-    return scene[name];
-}
-
-void Engine::update()
+void Engine::render()
 {
     float currentTime = glfwGetTime();
     deltaTime = currentTime - lastTime;
     lastTime = currentTime;
 
     Input::pollEvents();
-    
-    for (auto& [name, object] : scene)
-    object->transform.update();
-
-    for (auto& [name, object] : scene)
-    object->update();
     Audio::update();
-    for (auto& [name, object] : scene)
-    object->render();
-
-    for (auto& [name, object] : scene)
-    object->lateUpdate();
+    
+    scene->render();
 
     Window::swapBuffers();
 }

@@ -1,6 +1,7 @@
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
 
+#include "engine/scene.hpp"
 #include <defines.hpp>
 #include <unordered_map>
 #include <engine/render/material.hpp>
@@ -74,23 +75,9 @@ public:
     static Material* getMaterial(std::string name);
 
     /**
-     * @brief Adds a game object to the engine's scene.
-     * @param name Name to reference the object.
-     * @param object Pointer to a GameObject.
+     * @brief Render one frame, updating all objects.
      */
-    static void addGameObject(std::string name, GameObject* object);
-
-    /**
-     * @brief Retrieves a game object by name.
-     * @param name Name of the game object.
-     * @return Pointer to the GameObject, or nullptr if not found.
-     */
-    static GameObject* getGameObject(std::string name);
-
-    /**
-     * @brief Updates all game objects in the scene.
-     */
-    static void update();
+    static void render();
 
     /**
      * @brief Clears the screen (color and depth buffers).
@@ -100,7 +87,7 @@ public:
     /**
      * @brief Pointer to the current main camera.
      */
-    static Camera* camera;
+    static Scene* scene;
 
     /**
      * @brief Time difference between frames.
@@ -111,7 +98,6 @@ private:
     static std::unordered_map<std::string, Shader*> shaders;      /**< Collection of shaders by name. */
     static std::unordered_map<std::string, Texture*> textures;    /**< Collection of textures by name. */
     static std::unordered_map<std::string, Material*> materials;  /**< Collection of materials by name. */
-    static std::unordered_map<std::string, GameObject*> scene;    /**< Collection of game objects by name. */
 };
 
 #endif //ENGINE_HPP

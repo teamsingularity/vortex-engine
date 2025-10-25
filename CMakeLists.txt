@@ -18,6 +18,8 @@ src/engine/render/material.cpp
 src/engine/render/material.hpp
 src/engine/engine.hpp
 src/engine/engine.cpp
+src/engine/scene.hpp
+src/engine/scene.cpp
 src/component/component.hpp
 src/component/renderer.hpp
 src/component/renderers/meshrenderer.cpp
