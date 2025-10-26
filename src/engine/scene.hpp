@@ -1,6 +1,7 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
+#include <defines.hpp>
 #include <component/core/camera.hpp>
 #include <object/gameobject.hpp>
 #include <string>
@@ -10,7 +11,7 @@
  * @class Scene
  * @brief Manages game objects and incapsulates method to render scene.
  */
-class Scene
+class VORTEXAPI Scene
 {
 public:
     /**

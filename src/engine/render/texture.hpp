@@ -29,11 +29,24 @@ public:
     ~Texture();
 
     /**
-     * @brief Loads a texture from image data.
+     * @brief Loads a texture from RGBA image data.
      * @param image Image structure containing raw RGBA data and size.
      * @return Pointer to a new Texture object.
      */
     static Texture* load(image_t image);
+
+    /**
+     * @brief Creates a empty RGB texture.
+     * @param width Texture width.
+     * @param height Texture height.
+     * @return Pointer to a new Texture object.
+     */
+    static Texture* create(int width, int height);
+
+    /**
+     * @brief Binds the texture to a binded framebuffer.
+     */
+    void bindToFramebuffer();
 
     /**
      * @brief Binds the texture to a given texture unit.
