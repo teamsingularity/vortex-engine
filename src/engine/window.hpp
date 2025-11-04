@@ -35,7 +35,7 @@ public:
     /**
      * Cleans up resources and destroys window.
      */
-    static void terminate();
+    static void destroy();
 
     /**
      * Sets cursor mode.

@@ -25,7 +25,7 @@ public:
     /**
      * @brief Destroys OpenAL context and device.
      */
-    static void terminate();
+    static void destroy();
 
 private:
     /**

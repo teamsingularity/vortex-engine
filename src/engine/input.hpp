@@ -17,9 +17,9 @@ public:
     static bool init();
 
     /**
-     * @brief Terminates input system and releases resources.
+     * @brief destroys input system and releases resources.
      */
-    static void terminate();
+    static void destroy();
 
     /**
      * @brief Checks if a key is currently pressed.

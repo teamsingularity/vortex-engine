@@ -8,6 +8,7 @@
 #include <engine/input.hpp>
 #include <engine/audio.hpp>
 #include <engine/render/texture.hpp>
+#include <imgui/imgui.hpp>
 
 std::unordered_map<std::string, Shader*> Engine::shaders;
 std::unordered_map<std::string, Texture*> Engine::textures;
@@ -23,6 +24,7 @@ bool Engine::init(std::string title, int width, int height)
     if (!Window::init(width, height, title)) return false;
     if (!Input::init()) return false;
     if (!Audio::init()) return false;
+    if (!IMGUI::init()) return false;
 
     glEnable(GL_DEPTH_TEST);
 
@@ -36,11 +38,12 @@ bool Engine::init(std::string title, int width, int height)
     return true;
 }
 
-void Engine::terminate()
+void Engine::destroy()
 {
-    Window::terminate();
-    Input::terminate();
-    Audio::terminate();
+    Window::destroy();
+    Input::destroy();
+    Audio::destroy();
+    IMGUI::destroy();
 }
 
 void Engine::addShader(std::string name, Shader* shader)

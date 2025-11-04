@@ -30,9 +30,9 @@ public:
     static bool init(std::string title, int width, int height);
 
     /**
-     * @brief Terminates the engine, cleans up window and input systems.
+     * @brief destroys the engine, cleans up window and input systems.
      */
-    static void terminate();
+    static void destroy();
 
     /**
      * @brief Adds a shader to the engine's collection.

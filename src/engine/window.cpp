@@ -51,7 +51,7 @@ bool Window::shouldClose()
     return glfwWindowShouldClose(win);
 }
 
-void Window::terminate()
+void Window::destroy()
 {
     glfwTerminate();
 }

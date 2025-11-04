@@ -16,7 +16,7 @@ bool Audio::init()
 
 }
 
-void Audio::terminate()
+void Audio::destroy()
 {
     if (context)
     {

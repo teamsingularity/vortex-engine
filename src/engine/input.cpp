@@ -98,7 +98,7 @@ void Input::pollEvents()
     glfwPollEvents();
 }
 
-void Input::terminate()
+void Input::destroy()
 {
     // a stub
 }
