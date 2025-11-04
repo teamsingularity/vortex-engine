@@ -4,6 +4,7 @@
 #include <component/component.hpp>
 #include <glm/glm.hpp>
 #include <AL/al.h>
+#include <defines.hpp>
 #include "util/types.hpp"
 
 /**
@@ -16,7 +17,7 @@
  *
  * Each AudioSource corresponds to one OpenAL source handle (`ALuint source`).
  */
-class AudioSource : public Component
+class VORTEXAPI AudioSource : public Component
 {
 public:
     /**

@@ -145,4 +145,53 @@ void main() {
 }
 )";
 
+/**
+ * @brief Vertex shader for screen quad.
+ *
+ * Inputs:
+ * - `position` Vertex position.
+ * - `uv` Texture coordinate.
+ *
+ * Outputs:
+ * - `texCoord` : Texture coordinate for fragment shader.
+ */
+static const char* quadVertex = R"(
+#version 330 core
+
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec2 uv;
+
+out vec2 texCoord;
+
+void main() {
+    gl_Position = vec4(position.x, position.y, 0.0, 1.0);
+    texCoord = uv;
+}
+)";
+
+/**
+ * @brief Fragment shader for screen quad.
+ *
+ * Inputs:
+ * - `texCoord` : Interpolated texture coordinates from vertex shader.
+ *
+ * Uniforms:
+ * - `_texture` : Texture sampler.
+ *
+ * Outputs:
+ * - `color` : Final fragment color.
+ */
+static const char* quadFragment = R"(
+#version 330 core
+
+out vec4 color;
+in vec2 texCoord;
+
+uniform sampler2D _texture;
+
+void main() {
+    color = texture(_texture, texCoord);
+}
+)";
+
 #endif // SHADERS_HPP

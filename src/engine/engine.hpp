@@ -1,6 +1,8 @@
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
 
+#include "engine/render/framebuffer.hpp"
+#include "engine/render/mesh.hpp"
 #include "engine/scene.hpp"
 #include <defines.hpp>
 #include <unordered_map>
@@ -75,9 +77,17 @@ public:
     static Material* getMaterial(std::string name);
 
     /**
-     * @brief Render one frame, updating all objects.
+     * @brief Creates a new framebuffer with window size and returns pointer to it.
      */
-    static void render();
+    static Framebuffer* createFramebuffer();
+
+    /**
+     * @brief Render one frame, updating all objects.
+     * @param framebuffer Framebuffer in which scene should be rendered, do not specify to render directly to screen.
+     */
+    static void render(Framebuffer* framebuffer = nullptr);
+
+    static void renderQuad(Shader* shader);
 
     /**
      * @brief Clears the screen (color and depth buffers).
@@ -98,6 +108,8 @@ private:
     static std::unordered_map<std::string, Shader*> shaders;      /**< Collection of shaders by name. */
     static std::unordered_map<std::string, Texture*> textures;    /**< Collection of textures by name. */
     static std::unordered_map<std::string, Material*> materials;  /**< Collection of materials by name. */
+
+    static Mesh* quad; /**< Simple 2D fullscreen quad mesh, used for framebuffer rendering and UI. */
 };
 
 #endif //ENGINE_HPP

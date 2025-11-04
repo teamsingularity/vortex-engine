@@ -1,48 +1,10 @@
 cmake_minimum_required(VERSION 4.0)
 project(vortex-engine)
 
+file(GLOB_RECURSE CPP_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE HPP_FILES "${CMAKE_SOURCE_DIR}/src/*.hpp")
 
-add_library(vortex-engine SHARED
-# src/main.cpp
-src/engine/window.cpp
-src/engine/window.hpp
-src/engine/input.cpp
-src/engine/input.hpp
-src/engine/render/shader.cpp
-src/engine/render/shader.hpp
-src/engine/render/texture.cpp
-src/engine/render/texture.hpp
-src/engine/render/mesh.cpp
-src/engine/render/mesh.hpp
-src/engine/render/material.cpp
-src/engine/render/material.hpp
-src/engine/engine.hpp
-src/engine/engine.cpp
-src/engine/scene.hpp
-src/engine/scene.cpp
-src/component/component.hpp
-src/component/renderer.hpp
-src/component/renderers/meshrenderer.cpp
-src/component/renderers/meshrenderer.hpp
-src/component/core/camera.cpp
-src/component/core/camera.hpp
-src/object/gameobject.cpp
-src/object/gameobject.hpp
-src/object/transform.cpp
-src/object/transform.hpp
-src/loader/png.cpp
-src/loader/png.hpp
-src/util/types.hpp
-src/shaders.hpp
-src/loader/model.hpp
-src/loader/model.cpp
-src/loader/oggloader.cpp
-src/loader/oggloader.hpp
-src/component/core/audiosource.cpp
-src/component/core/audiosource.hpp
-src/engine/audio.cpp
-src/engine/audio.hpp
-)
+add_library(vortex-engine SHARED ${CPP_FILES} ${HPP_FILES})
 
 find_library(ASSIMP_LIB assimp PATHS /usr/lib /usr/lib/x86_64-linux-gnu REQUIRED)
 
