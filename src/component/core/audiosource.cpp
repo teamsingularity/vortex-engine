@@ -1,7 +1,8 @@
 #include "audiosource.hpp"
 #include <component/component.hpp>
 #include <object/gameobject.hpp>
-#include <iostream>
+#include <logger/logger.hpp>
+#include <string>
 
 AudioSource::AudioSource()
 {
@@ -44,15 +45,13 @@ void AudioSource::start()
 {
     alGenSources(1, &source);
     alGenBuffers(1, &buffer);
-
-    std::cout << buffer << std::endl;
     
     // Set default source properties
-    // alSourcef(source, AL_PITCH, 1.0f);
-    // alSourcef(source, AL_GAIN, 1.0f);
-    // alSource3f(source, AL_POSITION, 0, 0, 0);
-    // alSource3f(source, AL_VELOCITY, 0, 0, 0);
-    // alSourcei(source, AL_LOOPING, AL_FALSE);
+    alSourcef(source, AL_PITCH, 1.0f);
+    alSourcef(source, AL_GAIN, 1.0f);
+    alSource3f(source, AL_POSITION, 0, 0, 0);
+    alSource3f(source, AL_VELOCITY, 0, 0, 0);
+    alSourcei(source, AL_LOOPING, AL_FALSE);
 }
 
 void AudioSource::setBuffer(audio_t audio)
@@ -70,25 +69,25 @@ void AudioSource::setBuffer(audio_t audio)
     } else if (audio.channels == 2) {
         format = AL_FORMAT_STEREO16;
     } else {
-        std::cout << "Unsupported audio format: " << audio.channels << " channels" << std::endl;
+        Logger::error("Unsupported audio format: " + std::to_string(audio.channels) + " channels");
         return;
     }
 
     if (audio.data.empty()) {
-        std::cout << "Invalid audio data" << std::endl;
+        Logger::error("Invalid audio data");
         return;
     }
     
     alBufferData(buffer, format, audio.data.data(), audio.data.size() * sizeof(short), audio.sampleRate);
     ALenum error = alGetError();
     if (error != AL_NO_ERROR) {
-        std::cout << "OpenAL buffer error: " << error << std::endl;
+        Logger::error("OpenAL buffer error: " + std::to_string(error));
         return;
     }
     
     alSourcei(source, AL_BUFFER, buffer);
     error = alGetError();
     if (error != AL_NO_ERROR) {
-        std::cout << "OpenAL source error: " << error << std::endl;
+        Logger::error("OpenAL source error: " + std::to_string(error));
     }
 }

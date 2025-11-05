@@ -9,6 +9,8 @@
 #include <engine/audio.hpp>
 #include <engine/render/texture.hpp>
 #include <imgui/imgui.hpp>
+#include <logger/logger.hpp>
+#include <string>
 
 std::unordered_map<std::string, Shader*> Engine::shaders;
 std::unordered_map<std::string, Texture*> Engine::textures;
@@ -34,6 +36,10 @@ bool Engine::init(std::string title, int width, int height)
          1.0f,  1.0f, 0.0f,  1.0f, 1.0f,  // top-right
         -1.0f,  1.0f, 0.0f,  0.0f, 1.0f   // top-left
     }, {0, 1, 2, 2, 3, 0}, {3, 2});
+
+    const char* glver = (const char*) glGetString(GL_VERSION);
+
+    Logger::info("OpenGL version: " + std::string(glver));
     
     return true;
 }

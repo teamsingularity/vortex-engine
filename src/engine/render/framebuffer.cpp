@@ -1,6 +1,6 @@
 #include "framebuffer.hpp"
-#include "engine/render/texture.hpp"
-#include <iostream>
+#include <engine/render/texture.hpp>
+#include <logger/logger.hpp>
 
 Framebuffer::Framebuffer(GLuint id, GLuint depth, Texture* texture) : id(id), depth(depth), texture(texture)
 {
@@ -29,7 +29,7 @@ Framebuffer* Framebuffer::create(Texture *texture, int width, int height)
 
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
-        std::cout << "Failed to create framebuffer: framebuffer incomplete!" << std::endl;
+        Logger::critical("Failed to create framebuffer: framebuffer incomplete!");
         return nullptr;
     }
 

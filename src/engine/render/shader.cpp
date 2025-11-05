@@ -1,6 +1,6 @@
 #include "shader.hpp"
-#include <iostream>
 #include <glm/gtc/type_ptr.hpp>
+#include <logger/logger.hpp>
 
 Shader::Shader(GLuint id) : id(id) {}
 
@@ -24,7 +24,7 @@ Shader* Shader::load(const char* vertexCode, const char* fragmentCode)
     if (!success)
     {
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cerr << "Failed to link shader program: " << infoLog << std::endl;
+        Logger::critical("Failed to compile vertex shader: " + std::string(infoLog));
         return nullptr;
     }
 
@@ -38,7 +38,7 @@ Shader* Shader::load(const char* vertexCode, const char* fragmentCode)
     if (!success)
     {
         glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        std::cerr << "Failed to link shader program: " << infoLog << std::endl;
+        Logger::critical("Failed to compile fragment shader: " + std::string(infoLog));
         return nullptr;
     }
 
@@ -51,7 +51,7 @@ Shader* Shader::load(const char* vertexCode, const char* fragmentCode)
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cerr << "Failed to link shader program: " << infoLog << std::endl;
+        Logger::critical("Failed to link shader program: " + std::string(infoLog));
         return nullptr;
     }
 
