@@ -1,4 +1,5 @@
 #include "scene.hpp"
+#include "component/core/lightsource.hpp"
 #include "object/gameobject.hpp"
 #include <string>
 
@@ -38,4 +39,8 @@ void Scene::render()
 
     for (auto& [name, object] : objects)
         object->lateUpdate();
+}
+
+void Scene::addLightsource(Lightsource* lightsource){
+    lightsources.push_back(lightsource);
 }
