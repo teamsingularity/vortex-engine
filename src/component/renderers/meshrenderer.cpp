@@ -33,6 +33,7 @@ void MeshRenderer::render()
     Engine::getShader(litFragment)->uniformInt("numLights", numLights);
 
     for (int i = 0; i < numLights; ++i) {
+        Engine::getShader(litFragment)->use();
         Lightsource* l = lights[i];
         std::string prefix = "lights[" + std::to_string(i) + "].";
 

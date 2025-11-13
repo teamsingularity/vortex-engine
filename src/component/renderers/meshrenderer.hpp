@@ -52,7 +52,7 @@ public:
      * Frees any allocated graphics resources.
      */
     void destroy();
-private:
+public:
     bool isLit = true;
 };
 

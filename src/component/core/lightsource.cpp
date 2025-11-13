@@ -2,7 +2,9 @@
 #include "engine/engine.hpp"
 
 
-
+Lightsource::Lightsource(){
+    
+}
 void Lightsource::start()
 {
 Engine::scene->addLightsource(this);
