@@ -1,4 +1,6 @@
 #include "shader.hpp"
+#include "engine/render/texture.hpp"
+#include <glm/fwd.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <logger/logger.hpp>
 
@@ -71,3 +73,22 @@ void Shader::uniformMatrix4fv(std::string name, glm::mat4 matrix)
     GLuint loc = glGetUniformLocation(id, name.c_str());
     glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(matrix));
 }
+
+void Shader::uniformFloat(const std::string& name, float val)
+{
+    GLint loc = glGetUniformLocation(id, name.c_str());
+    glUniform1f(loc, val);
+}
+
+void Shader::uniformInt(const std::string& name, int val)
+{
+    GLuint loc = glGetUniformLocation(id, name.c_str());
+    glUniform1i(loc, val);
+}
+
+void Shader::uniformVec3(const std::string& name, const glm::vec3& vec)
+{
+    GLint loc = glGetUniformLocation(id, name.c_str());
+    glUniform3fv(loc, 1 , glm::value_ptr(vec));
+}
+

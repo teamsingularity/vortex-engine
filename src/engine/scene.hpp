@@ -1,12 +1,15 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
+
 #include <defines.hpp>
 #include <component/core/camera.hpp>
 #include <object/gameobject.hpp>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
+class Lightsource;
 /**
  * @class Scene
  * @brief Manages game objects and incapsulates method to render scene.
@@ -30,7 +33,7 @@ public:
      * @param object Pointer to a GameObject.
      */
     void addGameObject(std::string name, GameObject* object);
-
+    void addLightsource(Lightsource* lightsource);
     /**
      * @brief Retrieves a game object by name.
      * @param name Name of the game object.
@@ -47,8 +50,9 @@ public:
      * @brief Updates and renders all game objects
      */
     void render();
-
+    const std::vector<Lightsource*>& getLightsources() const { return lightsources; }
 private:
+    std::vector<Lightsource*> lightsources;
     std::unordered_map<std::string, GameObject*> objects;  /**< Scene objects table. */
 };
 

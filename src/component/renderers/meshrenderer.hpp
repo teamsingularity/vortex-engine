@@ -52,6 +52,8 @@ public:
      * Frees any allocated graphics resources.
      */
     void destroy();
+private:
+    bool isLit = true;
 };
 
 #endif // MESHRENDERER_HPP

@@ -42,6 +42,21 @@ public:
      * @param matrix GLM matrix that will be sent to shader.
      */
     void uniformMatrix4fv(std::string name, glm::mat4 matrix);
+    void uniformInt(const std::string& name, int val);
+    void uniformVec3(const std::string& name, const glm::vec3& vec);
+    void uniformFloat(const std::string& name, float val);
+
+    void setLightArray(int numLights,
+                           const int* types,
+                           const glm::vec3* positions,
+                           const glm::vec3* directions,
+                           const glm::vec3* colors,
+                           const float* constants,
+                           const float* linears,
+                           const float* quadratics,
+                           const float* cutOffs,
+                           const float* outerCutOffs);
+
 
 private:
     /**
